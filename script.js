@@ -1,4 +1,4 @@
-// Define the philosophers data
+// Define the philosopher data
 var philosophers = {
     "Plato": [3, 2, 1, 5, 3, 1],
     "Aristotle": [2, 3, 1, 4, 6, 5],
@@ -10,24 +10,28 @@ var philosophers = {
 
 // Function to calculate the matched philosopher
 function calculateMatch(answers) {
-    // Calculate the total score for each philosopher based on user's answers
-    var scores = {};
+    var bestMatch = null;
+    var bestScore = -1;
+
+    // Iterate through philosophers and calculate scores
     for (var philosopher in philosophers) {
-        var responseValues = philosophers[philosopher];
-        var totalScore = 0;
+        var scores = philosophers[philosopher];
+        var score = 0;
+
+        // Calculate the score for this philosopher
         for (var i = 1; i <= 6; i++) {
-            var answerValue = parseInt(answers['statement' + i]);
-            totalScore += Math.abs(answerValue - responseValues[i - 1]);
+            var answer = answers['statement' + i];
+            score += Math.abs(answer - scores[i - 1]);
         }
-        scores[philosopher] = totalScore;
+
+        // Check if this philosopher is the best match
+        if (bestMatch === null || score < bestScore) {
+            bestMatch = philosopher;
+            bestScore = score;
+        }
     }
 
-    // Find the philosopher with the minimum total score (closest match)
-    var matchedPhilosopher = Object.keys(scores).reduce(function (a, b) {
-        return scores[a] < scores[b] ? a : b;
-    });
-
-    return matchedPhilosopher;
+    return bestMatch;
 }
 
 // Function to display the matched philosopher on the page
@@ -39,13 +43,17 @@ function displayMatchedPhilosopher(matchedPhilosopher) {
     resultDiv.classList.remove('hidden');
 }
 
-// Function to handle form submission and calculate/display the match
+// Function to calculate match and display result when the Submit button is clicked
 function calculateMatchAndDisplay() {
     var formData = new FormData(document.getElementById('surveyForm'));
     var answers = {};
+
     for (var pair of formData.entries()) {
-        answers[pair[0]] = pair[1];
+        var questionName = pair[0];
+        var answerValue = pair[1];
+        answers[questionName] = answerValue;
     }
+
     var matchedPhilosopher = calculateMatch(answers);
     displayMatchedPhilosopher(matchedPhilosopher);
 }
