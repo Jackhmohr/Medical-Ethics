@@ -34,12 +34,12 @@ function calculateMatch(answers) {
 
     // Define the philosophers and their responses
     var philosophers = {
-        "Plato": [3, 2, 1],
-        "Aristotle": [2, 3, 1],
-        "Hegel": [1, 1, 3],
-        "Nietzsche": [1, 3, 3],
-        "Wittgenstein": [1, 2, 3],
-        "Russell": [1, 2, 2]
+        "Plato": [3, 2, 1,5,3,1],
+        "Aristotle": [2, 3, 1,4,6,5],
+        "Hegel": [1, 1, 3,3,2,1],
+        "Nietzsche": [1, 3, 3,6,5,3],
+        "Wittgenstein": [1, 2, 3,3,4,5],
+        "Russell": [1, 2, 2,4,3,1]
     };
 
     // Calculate similarity scores for each philosopher
