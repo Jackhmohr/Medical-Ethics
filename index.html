@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Philosopher Match Survey</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <form id="surveyForm">
+        <h1>Philosopher Match Survey</h1>
+        <!-- Repeat the following block for each statement -->
+        <div class="statement">
+            <label for="statement1">Statement 1</label>
+            <div class="likert">
+                <input type="radio" name="statement1" value="1" required> Strongly Disagree
+                <input type="radio" name="statement1" value="2"> Disagree
+                <input type="radio" name="statement1" value="3"> Neutral
+                <input type="radio" name="statement1" value="4"> Agree
+                <input type="radio" name="statement1" value="5"> Strongly Agree
+            </div>
+        </div>
+        <!-- ... more statements ... -->
+        <input type="submit" value="Submit">
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
