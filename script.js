@@ -1,19 +1,19 @@
-// Define the philosophers_responses data
-var philosophers_responses = {
-    "Plato": [3, 2, 1],
-    "Aristotle": [2, 3, 1],
-    "Hegel": [1, 1, 3],
-    "Nietzsche": [1, 3, 3],
-    "Wittgenstein": [1, 2, 3],
-    "Russell": [1, 2, 2]
+// Define the philosophers data
+var philosophers = {
+    "Plato": [3, 2, 1, 5, 3, 1],
+    "Aristotle": [2, 3, 1, 4, 6, 5],
+    "Hegel": [1, 1, 3, 3, 2, 1],
+    "Nietzsche": [1, 3, 3, 6, 5, 3],
+    "Wittgenstein": [1, 2, 3, 3, 4, 5],
+    "Russell": [1, 2, 2, 4, 3, 1]
 };
 
 // Function to calculate the matched philosopher
 function calculateMatch(answers) {
     // Calculate the total score for each philosopher based on user's answers
     var scores = {};
-    for (var philosopher in philosophers_responses) {
-        var responseValues = philosophers_responses[philosopher];
+    for (var philosopher in philosophers) {
+        var responseValues = philosophers[philosopher];
         var totalScore = 0;
         for (var i = 1; i <= 6; i++) {
             var answerValue = parseInt(answers['statement' + i]);
