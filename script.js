@@ -1,32 +1,34 @@
-document.getElementById('surveyForm').addEventListener('submit', function(event) {
+document.getElementById('surveyForm').addEventListener('submit', function(event){
     event.preventDefault();
+    
+    // Here you can handle the form data. For example:
+    var formData = new FormData(event.target);
+    var answers = {};
 
-    // Collect the form data
-    const formData = new FormData(event.target);
-    const answers = {};
-
-    for (const [key, value] of formData.entries()) {
-        answers[key] = value;
+    for (var pair of formData.entries()) {
+        answers[pair[0]] = pair[1];
     }
 
-    // Send the answers to the Flask backend
-    fetch('/answer', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(answers),
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Display the matched philosopher result
-        const resultDiv = document.getElementById('result');
-        const matchedPhilosopher = document.getElementById('matchedPhilosopher');
-        
-        matchedPhilosopher.textContent = data.matched_philosopher;
-        resultDiv.classList.remove('hidden');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    // You can replace this with code to process the form data and get the matched philosopher
+    var matchedPhilosopher = calculateMatch(answers);
+
+    // Display the matched philosopher
+    displayMatchedPhilosopher(matchedPhilosopher);
 });
+
+// Replace this with your actual matching algorithm
+function calculateMatch(answers) {
+    // Sample matching algorithm (replace with your own logic)
+    // You can use the answers object to calculate the match
+    // Return the name of the matched philosopher
+    return "Sample Philosopher";
+}
+
+// Display the matched philosopher on the page
+function displayMatchedPhilosopher(matchedPhilosopher) {
+    var resultDiv = document.getElementById('result');
+    var matchedPhilosopherElement = document.getElementById('matchedPhilosopher');
+
+    matchedPhilosopherElement.textContent = matchedPhilosopher;
+    resultDiv.classList.remove('hidden');
+}
