@@ -3,26 +3,29 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    text-align: center;
 }
 
-h1 {
-    color: #333;
-}
-
-form {
+.container {
     background: white;
     margin: 30px auto;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 500px;
+    max-width: 600px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+form {
+    text-align: left;
 }
 
 .statement {
     margin-bottom: 15px;
-    text-align: left;
 }
 
 .likert {
@@ -31,4 +34,27 @@ form {
 
 .likert input {
     margin-right: 5px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
 }
