@@ -11,7 +11,7 @@ var philosophers = {
 // Function to calculate the matched philosopher
 function calculateMatch(answers) {
     var bestMatch = null;
-    var bestScore = -1;
+    var highestScore = -1;
 
     // Iterate through philosophers and calculate scores
     for (var philosopher in philosophers) {
@@ -20,14 +20,24 @@ function calculateMatch(answers) {
 
         // Calculate the score for this philosopher
         for (var i = 1; i <= 6; i++) {
-            var answer = answers['statement' + i];
-            score += Math.abs(answer - scores[i - 1]);
+            var answer = parseFloat(answers['statement' + i]);
+            var correctAnswer = scores[i - 1];
+            var distance = Math.abs(answer - correctAnswer);
+
+            // Calculate partial points based on relative distance to 1 (closer is better)
+            var partialPoints = 1 - distance / 4; // Assuming the scale is from 1 to 5
+
+            // Ensure partialPoints is non-negative
+            partialPoints = Math.max(0, partialPoints);
+
+            // Add partialPoints to the score
+            score += partialPoints;
         }
 
-        // Check if this philosopher is the best match
-        if (bestMatch === null || score < bestScore) {
+        // Check if this philosopher has the highest score
+        if (score > highestScore) {
             bestMatch = philosopher;
-            bestScore = score;
+            highestScore = score;
         }
     }
 
