@@ -1,12 +1,17 @@
-document.getElementById('surveyForm').addEventListener('submit', function(event){
+document.getElementById('surveyForm').addEventListener('submit', function (event) {
     event.preventDefault();
-    
+
     // Here you can handle the form data. For example:
     var formData = new FormData(event.target);
     var answers = {};
 
     for (var pair of formData.entries()) {
-        answers[pair[0]] = pair[1];
+        // Use the name attribute to distinguish between questions
+        var questionName = pair[0];
+        var answerValue = pair[1];
+
+        // Store answers in an object using question names as keys
+        answers[questionName] = answerValue;
     }
 
     // You can replace this with code to process the form data and get the matched philosopher
