@@ -26,7 +26,23 @@ function calculateMatch(answers) {
     // Sample matching algorithm (replace with your own logic)
     // You can use the answers object to calculate the match
     // Return the name of the matched philosopher
-    return "Sample Philosopher";
+    // Example: Calculate match based on answers to questions 1, 2, 3, etc.
+    var totalScore = 0;
+    totalScore += parseInt(answers['statement1']);
+    totalScore += parseInt(answers['statement2']);
+    totalScore += parseInt(answers['statement3']);
+    totalScore += parseInt(answers['statement4']);
+    totalScore += parseInt(answers['statement5']);
+    totalScore += parseInt(answers['statement6']);
+    
+    // You can adjust the logic here to determine the matched philosopher
+    if (totalScore >= 18) {
+        return "Plato";
+    } else if (totalScore >= 15) {
+        return "Aristotle";
+    } else {
+        return "Hegel";
+    }
 }
 
 // Display the matched philosopher on the page
