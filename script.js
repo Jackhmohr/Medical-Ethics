@@ -1,7 +1,7 @@
 // Define the philosopher data
 var philosophers = {
     "Aristotle": [3, 3, 2, 4, 2, 3],
-    "Nietzsche": [2, 3, 3, 3, 4, 2],,
+    "Nietzsche": [2, 3, 3, 3, 4, 2],
     "Kant": [1, 1, 1, 5, 1, 1],
     "John Stuart Mill": [5, 4, 4, 3, 2, 4],
     "John Rawls": [3, 3, 3, 3, 2, 4],
@@ -41,8 +41,10 @@ function calculateMatch(answers) {
 function displayMatchedPhilosopher(matchedPhilosopher) {
     var resultDiv = document.getElementById('result');
     var matchedPhilosopherElement = document.getElementById('matchedPhilosopher');
+    var philosopherImageElement = document.getElementById('philosopherImage');
 
     matchedPhilosopherElement.textContent = matchedPhilosopher;
+    philosopherImageElement.src = 'images/' + matchedPhilosopher.toLowerCase() + '.jpg'; // Replace 'images/' with the correct path to your philosopher images
     resultDiv.classList.remove('hidden');
 }
 
