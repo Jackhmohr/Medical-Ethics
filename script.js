@@ -1,18 +1,14 @@
 // Define the philosopher data
 var philosophers = {
-    "Plato": [3, 2, 1, 5, 3, 1],
-    "Aristotle": [2, 3, 1, 4, 6, 5],
-    "Hegel": [1, 1, 3, 3, 2, 1],
-    "Nietzsche": [1, 3, 3, 6, 5, 3],
-    "Wittgenstein": [1, 2, 3, 3, 4, 5],
-    "Russell": [1, 2, 2, 4, 3, 1],
+    "Aristotle": [3, 3, 2, 4, 2, 3],
+    "Nietzsche": [2, 3, 3, 3, 4, 2],,
     "Kant": [1, 1, 1, 5, 1, 1],
     "John Stuart Mill": [5, 4, 4, 3, 2, 4],
-    "John Rawls": [3, 3, 3, 3, 2, 3],
-    "Philippa Foot": [3, 3, 3, 3, 2, 3],
-    "Karl Marx": [3, 3, 3, 3, 2, 3],
-    "Socrates": [3, 3, 3, 3, 2, 3],
-    "John Locke": [3, 3, 3, 4, 1, 2]
+    "John Rawls": [3, 3, 3, 3, 2, 4],
+    "Philippa Foot": [4, 2, 2, 4, 3, 3],
+    "Karl Marx": [2, 4, 3, 2, 1, 2],
+    "Socrates": [3, 2, 2, 4, 3, 3],
+    "John Locke": [4, 3, 3, 5, 1, 2]
 };
 
 // Function to calculate the matched philosopher
