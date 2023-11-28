@@ -1,3 +1,4 @@
+// Add an event listener to the form submission
 document.getElementById('surveyForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -14,27 +15,23 @@ document.getElementById('surveyForm').addEventListener('submit', function (event
         answers[questionName] = answerValue;
     }
 
-    // Calculate the matched philosopher based on answers
+    // Calculate the matched philosopher
     var matchedPhilosopher = calculateMatch(answers);
 
     // Display the matched philosopher
     displayMatchedPhilosopher(matchedPhilosopher);
 });
 
-// Custom matching algorithm
+// Define the function to calculate the matched philosopher
 function calculateMatch(answers) {
-    // Sample matching algorithm (replace with your own logic)
-    // You can use the answers object to calculate the match
-    // Return the name of the matched philosopher
-    // Example: Calculate match based on answers to questions 1, 2, 3, etc.
-    var totalScore = 0;
-    totalScore += parseInt(answers['statement1']);
-    totalScore += parseInt(answers['statement2']);
-    totalScore += parseInt(answers['statement3']);
-    totalScore += parseInt(answers['statement4']);
-    totalScore += parseInt(answers['statement5']);
-    totalScore += parseInt(answers['statement6']);
-    
+    // Extract response values as integers
+    var responseValues = [];
+    for (var i = 1; i <= 6; i++) {  // Adjust the loop for the number of statements
+        var questionName = 'statement' + i;
+        var answerValue = parseInt(answers[questionName]);
+        responseValues.push(answerValue);
+    }
+
     // Define the philosophers and their responses
     var philosophers = {
         "Plato": [3, 2, 1],
@@ -44,38 +41,24 @@ function calculateMatch(answers) {
         "Wittgenstein": [1, 2, 3],
         "Russell": [1, 2, 2]
     };
-    
-    // Calculate the similarity with each philosopher
-    var highestSimilarity = -1;
-    var bestMatch = "Unknown";
-    
+
+    // Calculate similarity scores for each philosopher
+    var similarityScores = {};
     for (var philosopher in philosophers) {
-        var similarity = cosineSimilarity(philosophers[philosopher], totalScore);
-        if (similarity > highestSimilarity) {
-            highestSimilarity = similarity;
-            bestMatch = philosopher;
+        var philosopherResponses = philosophers[philosopher];
+        var score = 0;
+        for (var i = 0; i < responseValues.length; i++) {
+            score += responseValues[i] * philosopherResponses[i];
         }
-    }
-    
-    return bestMatch;
-}
-
-// Calculate cosine similarity between two vectors
-function cosineSimilarity(vec1, vec2) {
-    var dotProduct = 0;
-    var normVec1 = 0;
-    var normVec2 = 0;
-
-    for (var i = 0; i < vec1.length; i++) {
-        dotProduct += vec1[i] * vec2[i];
-        normVec1 += vec1[i] * vec1[i];
-        normVec2 += vec2[i] * vec2[i];
+        similarityScores[philosopher] = score;
     }
 
-    normVec1 = Math.sqrt(normVec1);
-    normVec2 = Math.sqrt(normVec2);
+    // Find the philosopher with the highest similarity score
+    var matchedPhilosopher = Object.keys(similarityScores).reduce(function (a, b) {
+        return similarityScores[a] > similarityScores[b] ? a : b;
+    });
 
-    return dotProduct / (normVec1 * normVec2);
+    return matchedPhilosopher;
 }
 
 // Display the matched philosopher on the page
