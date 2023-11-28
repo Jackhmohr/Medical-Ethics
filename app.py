@@ -8,6 +8,9 @@ philosophers_responses = {
     "Plato": [3, 2, 1],
     "Aristotle": [2, 3, 1],
     "Hegel": [1, 1, 3],
+    "Nietzche": [1, 3, 3],
+    "Wittgenstein": [1, 2, 3],
+    "Russell": [1, 2, 2],
     # Add responses for other philosophers
 }
 
