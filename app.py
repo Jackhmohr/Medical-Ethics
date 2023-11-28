@@ -37,7 +37,7 @@ def find_best_match(user_responses):
 def match():
     try:
         # Get user responses from the form
-        user_responses = [int(request.form[f'statement{i}']) for i in range(1, 4)]  # Change 4 to 11 for all statements
+        user_responses = [int(request.form[f'statement{i}']) for i in range(1, 3)]  # Change 4 to 11 for all statements
 
         # Find the best matching philosopher
         matched_philosopher = find_best_match(user_responses)
