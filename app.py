@@ -1,18 +1,17 @@
 from flask import Flask, request, jsonify
+import numpy as np
 
 app = Flask(__name__)
 
 # Define philosopher responses (replace with your data)
 philosophers_responses = {
-    "Plato": [3,2,1],
-    "Aristotle": [2,3,1],
-    "Hegel":[1,1,3]
+    "Plato": [3, 2, 1],
+    "Aristotle": [2, 3, 1],
+    "Hegel": [1, 1, 3],
     # Add responses for other philosophers
 }
 
 # Define a function to calculate cosine similarity
-import numpy as np
-
 def cosine_similarity(vec1, vec2):
     dot_product = np.dot(vec1, vec2)
     norm_vec1 = np.linalg.norm(vec1)
@@ -38,7 +37,7 @@ def find_best_match(user_responses):
 def match():
     try:
         # Get user responses from the form
-        user_responses = [int(request.form[f'statement{i}']) for i in range(1, 11)]
+        user_responses = [int(request.form[f'statement{i}']) for i in range(1, 4)]  # Change 4 to 11 for all statements
 
         # Find the best matching philosopher
         matched_philosopher = find_best_match(user_responses)
