@@ -14,14 +14,14 @@ document.getElementById('surveyForm').addEventListener('submit', function (event
         answers[questionName] = answerValue;
     }
 
-    // You can replace this with code to process the form data and get the matched philosopher
+    // Calculate the matched philosopher based on answers
     var matchedPhilosopher = calculateMatch(answers);
 
     // Display the matched philosopher
     displayMatchedPhilosopher(matchedPhilosopher);
 });
 
-// Replace this with your actual matching algorithm
+// Custom matching algorithm
 function calculateMatch(answers) {
     // Sample matching algorithm (replace with your own logic)
     // You can use the answers object to calculate the match
@@ -35,14 +35,47 @@ function calculateMatch(answers) {
     totalScore += parseInt(answers['statement5']);
     totalScore += parseInt(answers['statement6']);
     
-    // You can adjust the logic here to determine the matched philosopher
-    if (totalScore >= 18) {
-        return "Plato";
-    } else if (totalScore >= 15) {
-        return "Aristotle";
-    } else {
-        return "Hegel";
+    // Define the philosophers and their responses
+    var philosophers = {
+        "Plato": [3, 2, 1],
+        "Aristotle": [2, 3, 1],
+        "Hegel": [1, 1, 3],
+        "Nietzsche": [1, 3, 3],
+        "Wittgenstein": [1, 2, 3],
+        "Russell": [1, 2, 2]
+    };
+    
+    // Calculate the similarity with each philosopher
+    var highestSimilarity = -1;
+    var bestMatch = "Unknown";
+    
+    for (var philosopher in philosophers) {
+        var similarity = cosineSimilarity(philosophers[philosopher], totalScore);
+        if (similarity > highestSimilarity) {
+            highestSimilarity = similarity;
+            bestMatch = philosopher;
+        }
     }
+    
+    return bestMatch;
+}
+
+// Calculate cosine similarity between two vectors
+function cosineSimilarity(vec1, vec2) {
+    var dotProduct = 0;
+    var normVec1 = 0;
+    var normVec2 = 0;
+
+    for (var i = 0; i < vec1.length; i++) {
+        dotProduct += vec1[i] * vec2[i];
+        normVec1 += vec1[i] * vec1[i];
+        normVec2 += vec2[i] * vec2[i];
+    }
+
+    normVec1 = Math.sqrt(normVec1);
+    normVec2 = Math.sqrt(normVec2);
+
+    return dotProduct / (normVec1 * normVec2);
 }
 
 // Display the matched philosopher on the page
