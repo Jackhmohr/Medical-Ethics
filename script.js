@@ -1,12 +1,32 @@
-document.getElementById('surveyForm').addEventListener('submit', function(event){
+document.getElementById('surveyForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    
-    // Here you can handle the form data. For example:
-    var formData = new FormData(event.target);
-    for (var pair of formData.entries()) {
-        console.log(pair[0]+ ': ' + pair[1]); 
+
+    // Collect the form data
+    const formData = new FormData(event.target);
+    const answers = {};
+
+    for (const [key, value] of formData.entries()) {
+        answers[key] = value;
     }
 
-    // You can replace this with code to process the form data
-    alert('Form submitted!');
+    // Send the answers to the Flask backend
+    fetch('/answer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(answers),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Display the matched philosopher result
+        const resultDiv = document.getElementById('result');
+        const matchedPhilosopher = document.getElementById('matchedPhilosopher');
+        
+        matchedPhilosopher.textContent = data.matched_philosopher;
+        resultDiv.classList.remove('hidden');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
